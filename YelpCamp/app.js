@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 // console.log(process.env.CLOUDINARY_KEY);
 // console.log(process.env.CLOUDINARY_SECRET);
 
+const sanitizeV5 = require("./utils/mongoSanitizeV5.js");
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -33,6 +34,7 @@ db.once("open", () => {
 
 const app = express();
 
+app.set("query parser", "extended");
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
