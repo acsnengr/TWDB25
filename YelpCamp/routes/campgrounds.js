@@ -10,15 +10,12 @@ const upload = multer({ storage });
 
 const Campground = require("../models/campground");
 //GET: index route && POST: create campground
-router
-  .route("/")
-  .get(catchAsync(campgrounds.index))
-  .post(
-    isLoggedIn,
-    validateCampground,
-    upload.array("image"),
-    catchAsync(campgrounds.createNewCamp)
-  );
+router.route("/").get(catchAsync(campgrounds.index)).post(
+  isLoggedIn,
+  upload.array("image"),
+  validateCampground,
+  catchAsync(campgrounds.createNewCamp)
+);
 
 //new campground form
 router.get("/new", isLoggedIn, campgrounds.renderNewForm);
@@ -30,8 +27,8 @@ router
   .put(
     isLoggedIn,
     isAuthor,
-    validateCampground,
     upload.array("image"),
+    validateCampground,
     catchAsync(campgrounds.editCamp)
   )
   .delete(isLoggedIn, isAuthor, catchAsync(campgrounds.destroyCamp));
