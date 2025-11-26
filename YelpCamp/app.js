@@ -32,6 +32,7 @@ const MongoStore = require("connect-mongo");
 
 // const dbUrl = process.env.DB_URL;
 const dbUrl = "mongodb://localhost:27017/yelp-camp";
+const secret = process.env.SECRET;
 // "mongodb://localhost:27017/yelp-camp"
 mongoose.set("strictQuery", true);
 mongoose.connect(dbUrl);
@@ -57,13 +58,13 @@ app.use(sanitizeV5({ replaceWith: "_" }));
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   touchAfter: 24 * 60 * 60,
-  secret: "thisshouldbeabettersecret!",
+  secret,
 });
 
 const sessionConfig = {
   store,
   name: "session",
-  secret: "thisshouldbeabettersecret!",
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
