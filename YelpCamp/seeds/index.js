@@ -12,7 +12,8 @@ db.once("open", () => {
 });
 
 const sample = (array) => array[Math.floor(Math.random() * array.length)];
-
+// yelp-camp user: 6926b3d87ceb807f441db847 (for seed author)
+// yelp-camp-maptiler user: 6926f80671fd28135dd9cd6b (for testing)
 const seedDB = async () => {
   await Campground.deleteMany({});
   for (let i = 0; i < 50; i++) {
@@ -20,11 +21,8 @@ const seedDB = async () => {
     const price = Math.floor(Math.random() * 20) + 10;
     const camp = new Campground({
       author: "6926b3d87ceb807f441db847",
+
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
-      title: `${sample(descriptors)} ${sample(places)}`,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      price,
       geometry: {
         type: "Point",
         coordinates: [
@@ -32,6 +30,10 @@ const seedDB = async () => {
           cities[random1000].latitude,
         ],
       },
+      title: `${sample(descriptors)} ${sample(places)}`,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      price,
       images: [
         {
           url: "https://res.cloudinary.com/dycytpsj9/image/upload/v1764159193/YelpCamp/mtisd1iewdbl2cfixaa0.jpg",
